@@ -1,6 +1,6 @@
 using UnityEngine;
 using MoonSharp.Interpreter;
-//hello
+
 [MoonSharpUserData]
 public class Player {
 
