@@ -1,0 +1,55 @@
+* Nightmare game Documentation
+** Lua API
+   Lua Scripts have these functions:
+   1. onLoad
+      Typically called when the a game is first loaded and the player is spawned for the 
+      first time.
+** Dialogue
+*** Prefixes:
+    For now there are 4 special prefixes:
+1. T_:
+   The prefix "T_" is reserved for locations.
+2. I_:
+   The prefix "I_" is reserved for item names
+3. C_:
+   The prefix "I_" is reserved for Character names
+4. S_:
+    The prefix "I_" is reserved for saved data
+    
+*** Example Usage:
+Debug.Log(GameData.Replace("Hello, {S_playerName}! It's good to see you!"));
+
+* Tasks
+** DONE Add error handling for lua scripts
+   CLOSED: [2017-06-23 Παρ 13:50]
+   FileName: Mod.cs L64
+** DONE Create a function for adding todo's here
+   CLOSED: [2017-06-23 Παρ 15:43]
+   Filename: *scratch* L17
+** TODO Add Easter eggs on certain names
+   GameData.cs L129
+** TODO Create Lua API
+** TODO Start a timer when a new Game is initialized
+   FileName: GameData.cs L138
+** TODO Show a message when a new Game with an existing name is made
+   FileName: StartMenu.cs L48
+** TODO Load a scene when a new game is created
+   FileName: StartMenu.cs L55
+** TODO Show more information on the load game button
+   FileName: StartMenu.cs L63
+** TODO Add Player Inventory and check for keys when opening a door
+   FileName: Door.cs L19
+** TODO Add Delay effect on DialogueEngine print method
+   FileName: DialogueEngine.cs L20
+** TODO Add Controls for Talking player state
+   FileName: PlayerController.cs L44
+** TODO Add Settings class
+   FileName: Settings.cs
+** TODO Add a setting for hiding debug Lua messages
+   FileName: Mod.cs L70
+** TODO Write more documentation
+   FileName: Documentation.org
+** TODO Refactor Lua Mod loading
+   Filename: Mod.cs L58
+** TODO Add params to Lua call function
+   Filename: Mod.cs L50
