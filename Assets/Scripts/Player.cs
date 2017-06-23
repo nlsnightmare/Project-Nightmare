@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using MoonSharp.Interpreter;
 
 [MoonSharpUserData]
@@ -17,6 +18,20 @@ public class Player {
 	PlayerPrefab = Resources.Load<GameObject>("Prefabs/player");
     }
     
+    public static void TakeDamage(int amount,bool isLethal){
+	if (amount <= 0) return;
+
+	PlayerStats.Hp = Math.Min(PlayerStats.Hp - amount, isLethal?0:1);
+	if (PlayerStats.Hp == 0)
+	    Mod.Trigger("onPlayerDeath");
+	else
+	    Mod.Trigger("onPlayerHit");
+
+    }
+
+    public static void Spawn(int x, int y){
+	Spawn(new Vector2(x,y));
+    }
     public static void Spawn(Vector2 pos){
 	playerGO = GameObject.Instantiate(PlayerPrefab,pos,Quaternion.identity);
 	pController = playerGO.GetComponent<PlayerController>();
@@ -28,7 +43,6 @@ public class Player {
 	pController.PlayerState = state;
     }
     public static void SetState(string state){
-	Debug.Log("A");
 	switch (state) {
 	    case "Stunned":
 		pController.PlayerState = ControlState.Stunned;
@@ -40,9 +54,5 @@ public class Player {
 		pController.PlayerState = ControlState.Talking;
 		break;
 	}
-    }
-
-    public static void DebugLua(string s){
-	Debug.Log(s);
     }
 }

@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Core\DialogueEngine.cs" />
      <Compile Include="Assets\Scripts\Core\GameData.cs" />
+     <Compile Include="Assets\Scripts\Core\LuaCoreAPI.cs" />
      <Compile Include="Assets\Scripts\Core\Mod.cs" />
      <Compile Include="Assets\Scripts\Core\ModManager.cs" />
      <Compile Include="Assets\Scripts\Core\Settings.cs" />
@@ -56,6 +57,7 @@
      <Compile Include="Assets\Scripts\IInteractable.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\PlayerStats.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -57,6 +57,7 @@ public class Mod {
 
     public static void AddGlobalsToScript(ref Script s){
 	s.Globals[ "player" ] = typeof( Player );
+	s.Globals[  "core"  ] = typeof( LuaCoreAPI );
     }
 
     //TODO: Refactor Lua Mod loading

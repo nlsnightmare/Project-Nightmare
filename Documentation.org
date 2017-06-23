@@ -1,23 +1,53 @@
 * Nightmare game Documentation
 ** Lua API
-   Lua Scripts have these functions:
-   1. onLoad
-      Typically called when the a game is first loaded and the player is spawned for the 
-      first time.
+*** Events
+    Lua Scripts have these events:
+    1. _onLoad_
+       Typically called when the a game is first loaded and the player is spawned for the 
+       first time.
+    2. _onPlayerHit_
+       Executed when the player takes damage.
+    3. _onPlayerDeath_
+       Executed when the player dies.
+       
+*** Player object(In progress)
+    The player object is available globally, and it has these functions:
+    1. _Spawn(x,y)_
+       Instantiates the player GameObject at given position
+       *x*: x position of the player
+       *y*: y position of the player
+    2. _SetState(state)_
+       Sets the state of the player. State must be a string
+       States are: 
+       *Normal* : the player can move and attack, interact etc.
+       *Stunned*: the player cannot do anything.
+    3. _TakeDamage(amount, isLethal)_
+       Deals damage to the player.
+       *amount*: The amount of damage to take
+
+*** Core Object (In progress)
+    1. _Print(message)_
+       Displays the message on the Unity Debug console.
+       If the game has enabled *Lua Debug* then the message will also appear 
+       in-game
+       *message*: the message to be displayed
+    2. _ShowDialogue(messages)_
+       Displays the messages on the dialogue box. Also freezes the player
+       *messages*: the array of messages to be displayed
 ** Dialogue
 *** Prefixes:
     For now there are 4 special prefixes:
-1. T_:
-   The prefix "T_" is reserved for locations.
-2. I_:
-   The prefix "I_" is reserved for item names
-3. C_:
-   The prefix "I_" is reserved for Character names
-4. S_:
-    The prefix "I_" is reserved for saved data
-    
+    1. T_:
+       The prefix "T_" is reserved for locations.
+    2. I_:
+       The prefix "I_" is reserved for item names
+    3. C_:
+       The prefix "I_" is reserved for Character names
+    4. S_:
+       The prefix "I_" is reserved for saved data
+
 *** Example Usage:
-Debug.Log(GameData.Replace("Hello, {S_playerName}! It's good to see you!"));
+    Debug.Log(GameData.Replace("Hello, {S_playerName}! It's good to see you!"));
 
 * Tasks
 ** DONE Add error handling for lua scripts
@@ -26,13 +56,18 @@ Debug.Log(GameData.Replace("Hello, {S_playerName}! It's good to see you!"));
 ** DONE Create a function for adding todo's here
    CLOSED: [2017-06-23 Παρ 15:43]
    Filename: *scratch* L17
+** DONE Show a message when a new Game with an existing name is made
+   CLOSED: [2017-06-23 Παρ 18:16]
+   FileName: StartMenu.cs L48
+** DONE Create Lua API
+   CLOSED: [2017-06-24 Σαβ 00:12]
+** DONE Make Player take damage
+   CLOSED: [2017-06-24 Σαβ 00:30]
+   Filename: Player.cs L21
 ** TODO Add Easter eggs on certain names
    GameData.cs L129
-** TODO Create Lua API
 ** TODO Start a timer when a new Game is initialized
    FileName: GameData.cs L138
-** TODO Show a message when a new Game with an existing name is made
-   FileName: StartMenu.cs L48
 ** TODO Load a scene when a new game is created
    FileName: StartMenu.cs L55
 ** TODO Show more information on the load game button
@@ -41,7 +76,7 @@ Debug.Log(GameData.Replace("Hello, {S_playerName}! It's good to see you!"));
    FileName: Door.cs L19
 ** TODO Add Delay effect on DialogueEngine print method
    FileName: DialogueEngine.cs L20
-** TODO Add Controls for Talking player state
+** TODO Add Input for Talking player state
    FileName: PlayerController.cs L44
 ** TODO Add Settings class
    FileName: Settings.cs
@@ -53,3 +88,7 @@ Debug.Log(GameData.Replace("Hello, {S_playerName}! It's good to see you!"));
    Filename: Mod.cs L58
 ** TODO Add params to Lua call function
    Filename: Mod.cs L50
+** TODO Show Debug logs in-game if  lua debug setting is enabled
+   Filename: LuaCore.cs L5
+** TODO Implement Dialogue Engine
+   Filename: LuaCoreAPI.cs L12
