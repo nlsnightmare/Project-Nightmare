@@ -16,11 +16,12 @@ public class PlayerController : MonoBehaviour {
     void Start () {
 	if (playerGO == null)
 	    playerGO = gameObject;
-	else if(playerGO != this.gameObject)
+	else if(playerGO != this.gameObject){
 	    Destroy(this.gameObject);
+	    return;
+	}
 
 	DontDestroyOnLoad(transform.gameObject);
-
 	rb = GetComponent<Rigidbody2D>();
     }
 

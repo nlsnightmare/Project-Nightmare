@@ -28,7 +28,6 @@ public class ModManager : MonoBehaviour {
 
     public static void ToggleMod(string name){
 	int count = 0;
-	Debug.Log(name);
 	foreach (var m in Mod.Mods){
 	    if(m.Name == name){
 		m.isActive = !m.isActive;

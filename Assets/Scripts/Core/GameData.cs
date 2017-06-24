@@ -18,6 +18,9 @@ public static class GameData {
 	TownNames = LoadDictionaryFromFile("Data/TownNames.dat");
 	ItemNames = LoadDictionaryFromFile("Data/ItemNames.dat");
 	CharacterNames = LoadDictionaryFromFile("Data/CharacterNames.dat");
+	UnityEngine.SceneManagement.SceneManager.sceneLoaded += (scene, mode) => {
+	    Mod.Trigger("onLoad");
+	};
     }
 
 

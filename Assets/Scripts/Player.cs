@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Threading;
 using MoonSharp.Interpreter;
 
 [MoonSharpUserData]
@@ -36,8 +37,6 @@ public class Player {
     public static void Spawn(Vector2 pos){
 	playerGO = GameObject.Instantiate(PlayerPrefab,pos,Quaternion.identity);
 	pController = playerGO.GetComponent<PlayerController>();
-
-	Mod.Trigger("onLoad");
     }
 
     public static void SetState(ControlState state){

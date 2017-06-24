@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,16 +17,9 @@ public class DialogueEngine : MonoBehaviour {
     void Start(){
 	if(Instance == null)
 	    Instance = this;
-	ShowText("Ok please make this work", "fast");
     }
 
-    public static void Print(string[] messages){
-
-    }
-
-
-    //This is the function which begins showing text
-    public static void ShowText(string s, string speed){
+    static void SetDelay(string speed){
 	int delay = 0;
 	switch (speed) {
 	    case "slow":
@@ -43,20 +34,45 @@ public class DialogueEngine : MonoBehaviour {
 	    default:
 		break;
 	}
-        Instance.DialogueBox.text = "";
-        TargetString = s;
+        Delay = delay;
+    }
+
+    public static void Print(string message, string speed){
+	SetDelay(speed);
+	StartDialogueThread(message,speed);
+    }
+
+    public static void Print(string[] messages, string speed){
+	SetDelay(speed);
+	StartDialogueThread(messages,speed);
+    }
+
+    //This is the function which begins showing text
+    public static void StartDialogueThread(string s, string speed){
         if (t != null)
         {
             t.Abort();
         }
-        t = new Thread(ShowDialogue);
-        Delay = delay;
-        t.Start();
+        t = new Thread( () => {
+		DialogueEngine.ShowDialogue(s);
+	    });
+	t.Start();
+    }
+
+    public static void StartDialogueThread(string[] s, string speed){
+        if (t != null)
+        {
+            t.Abort();
+        }
+        t = new Thread( () => {
+		DialogueEngine.ShowDialogue(s);
+	    });
+	t.Start();
     }
 
 
     //Runs on a seperate thread, prints the text
-    static void ShowDialogue(){
+    public static void ShowDialogue(string TargetString){
         Player.SetState(Player.ControlState.Talking);
         StringToShow = "";
         foreach (var c in TargetString)
@@ -76,6 +92,13 @@ public class DialogueEngine : MonoBehaviour {
 
 	StringToShow = "";
 	Player.SetState(Player.ControlState.Normal);
+    }
+
+    public static void ShowDialogue(string[] messages){
+	foreach (var msg in messages){
+	    ShowDialogue(msg);
+
+	}
     }
 
 

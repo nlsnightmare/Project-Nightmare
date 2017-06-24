@@ -11,10 +11,10 @@ public class LuaCoreAPI {
 
     //TODO: Implement Dialogue Engine
     public static void ShowDialogue(string[] messages, string speed){
-	foreach (var m in messages){
-	    Debug.Log(m);
+	for (int i = 0; i < messages.Length; i++) {
+	    Debug.Log("messages["+i+"] = " + messages[i]);
 	}
-	DialogueEngine.ShowText(messages[0],speed);
+	DialogueEngine.Print(messages,speed);
     }
 
 }
