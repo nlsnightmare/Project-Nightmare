@@ -96,10 +96,12 @@ public class DialogueEngine : MonoBehaviour {
 
     public static void ShowDialogue(string[] messages){
 	foreach (var msg in messages){
-	    ShowDialogue(msg);
-
+			ShowDialogue(msg);
+			waitingConfirm = true;
+			Thread.Sleep(10);
+		}
+		StringToShow = "";
 	}
-    }
 
 
     void Update(){
