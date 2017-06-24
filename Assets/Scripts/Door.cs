@@ -21,7 +21,6 @@ public class Door : MonoBehaviour, IInteractable {
 	}
 	else {
 	    //display a message saying the door is locked
-	    DialogueEngine.Print("You try to open the door...\nBut it appears to be locked. Also {S_playerName}");
 	}
     }
 }

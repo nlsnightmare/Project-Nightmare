@@ -8,7 +8,8 @@ public class Player {
     public enum ControlState {
 	Normal,
 	Stunned,
-	Talking
+	Talking,
+	Confirm
     }
 
     private static PlayerController pController;

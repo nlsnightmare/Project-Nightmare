@@ -160,6 +160,7 @@ public class Mod {
 
     public static void Trigger(string eventName)
     {
+	//TODO: Optimize Mod.Trigger so that it doesn't have to loop through each mod every time
 	foreach(Mod m in Mods)
 	    m.Call(eventName);
     }

@@ -92,3 +92,5 @@
    Filename: LuaCore.cs L5
 ** TODO Implement Dialogue Engine
    Filename: LuaCoreAPI.cs L12
+** TODO Optimize Mod.Trigger so that it doesn't have to loop through each mod every time
+   Filename: Mod.cs L163

@@ -31,13 +31,14 @@ public class PlayerController : MonoBehaviour {
 		float v = Input.GetAxisRaw("Vertical");
 		rb.velocity = ( h * Vector3.right + v * Vector3.up ) * moveSpeed;
 
-		if(Input.GetAxis("Interact") > 0){
+		if(Input.GetKeyDown(KeyCode.Q)){
 		    Debug.Log("interact!!!");
 		    Interact();
 		}
 		break;
 	    case Player.ControlState.Talking:
-		//TODO
+		if (Input.GetKeyDown(KeyCode.Q))
+		    DialogueEngine.waitingConfirm = false;
 		break;
 	    default:
 		break;

@@ -9,54 +9,42 @@ public class DialogueEngine : MonoBehaviour {
 
     public Text DialogueBox;
     public static DialogueEngine Instance;
+    static Thread t;
+    static bool isReady = false;
+    public static bool waitingConfirm = true;
+    static string StringToShow = "";
+    static string TargetString = "";
+    static int Delay = 1000;
+
     void Start(){
 	if(Instance == null)
 	    Instance = this;
-	DialogueBox = GameObject.Find("DialogueBox").GetComponent<Text>();
+	ShowText("Ok please make this work", "fast");
     }
 
-    public static void Print(string message){
-	Player.SetState(Player.ControlState.Talking);
-	message = GameData.ReplaceParameters(message,true);
-	Instance.DialogueBox.text = message;
-    }
     public static void Print(string[] messages){
 
     }
 
 
-
-    static Thread t;
-    static bool isReady = false;
-    static string StringToShow = "";
-    static string TargetString = "";
-    static int Delay;
-
-    static void ShowDialogue()
-    {
-        Player.SetState(Player.ControlState.Talking);
-        StringToShow = "";
-        foreach (var c in TargetString)
-        {
-            isReady = false;
-            StringToShow += c;
-            isReady = true;
-            Thread.Sleep(Delay);
-        }
-    }
-
-
-    void Update()
-    {
-        if (!isReady || !t.IsAlive) return;
-        DialogueBox.text = StringToShow;
-    }
-
-    public static void ShowText(string s, int delay)
-    {
+    //This is the function which begins showing text
+    public static void ShowText(string s, string speed){
+	int delay = 0;
+	switch (speed) {
+	    case "slow":
+		delay = 150;
+		break;
+	    case "normal":
+		delay = 75;
+		break;
+	    case "fast":
+		delay = 50;
+		break;
+	    default:
+		break;
+	}
         Instance.DialogueBox.text = "";
         TargetString = s;
-        Debug.Log(t);
         if (t != null)
         {
             t.Abort();
@@ -65,5 +53,36 @@ public class DialogueEngine : MonoBehaviour {
         Delay = delay;
         t.Start();
     }
+
+
+    //Runs on a seperate thread, prints the text
+    static void ShowDialogue(){
+        Player.SetState(Player.ControlState.Talking);
+        StringToShow = "";
+        foreach (var c in TargetString)
+        {
+	    if (!waitingConfirm){
+		StringToShow = TargetString;
+		break;
+	    }
+	    
+            isReady = false;
+            StringToShow += c;
+            isReady = true;
+            Thread.Sleep(Delay);
+        }
+	waitingConfirm = true;
+	while(waitingConfirm);
+
+	StringToShow = "";
+	Player.SetState(Player.ControlState.Normal);
+    }
+
+
+    void Update(){
+        if (!isReady || !t.IsAlive) return;
+        DialogueBox.text = StringToShow;
+    }
+
 
 }
