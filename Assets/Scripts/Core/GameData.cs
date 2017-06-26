@@ -23,6 +23,15 @@ public static class GameData {
 	};
     }
 
+    public static void LoadFlag<T>(string flagname){
+	if(SaveData.ContainsKey(flagname)){
+	    UnityEngine.Debug.Log("it exists!");
+	}
+	else
+	{
+	    UnityEngine.Debug.Log("dont have it");
+	}
+    }
 
     static Dictionary<string,string> LoadDictionaryFromFile(string filename){
 	Dictionary<string,string> dict = new Dictionary<string,string>();
@@ -51,34 +60,34 @@ public static class GameData {
 	    switch (prefix) {
 		case "T_": 
 		    if(!TownNames.ContainsKey(key)){
-                        UnityEngine.Debug.LogError("Key <color=red>" + key + "</color> does not exist in <color=black>town names</color>");
+			UnityEngine.Debug.LogError("Key <color=red>" + key + "</color> does not exist in <color=black>town names</color>");
 			return "";
 		    }
 		    input = input.Replace( s,TownNames[key] );
 		    break;
 		case "I_":
 		    if(!ItemNames.ContainsKey(key)){
-                        UnityEngine.Debug.LogError("Key <color=red>" + key + "</color> does not exist in <color=black>character names</color>");
+			UnityEngine.Debug.LogError("Key <color=red>" + key + "</color> does not exist in <color=black>character names</color>");
 			return "";
 		    }
 		    input = input.Replace( s, ItemNames[key] );
 		    break;
 		case "S_":
 		    if(!SaveData.ContainsKey(key)){
-                        UnityEngine.Debug.LogError("Key <color=red>" + key + "</color> does not exist in <color=black>other</color>");
+			UnityEngine.Debug.LogError("Key <color=red>" + key + "</color> does not exist in <color=black>other</color>");
 			return "";
 		    }
 		    input = input.Replace( s, SaveData[key] );
 		    break;
 		case "C_":
 		    if(!CharacterNames.ContainsKey(key)){
-                        UnityEngine.Debug.LogError("Key <color=red>" + key + "</color> does not exist in <color=black>character names</color>");
+			UnityEngine.Debug.LogError("Key <color=red>" + key + "</color> does not exist in <color=black>character names</color>");
 			return "";
 		    }
 		    input = input.Replace( s, CharacterNames[key] );
 		    break;
 		default:
-                    UnityEngine.Debug.LogError("Key prefix " + prefix + " does not exist! ");
+		    UnityEngine.Debug.LogError("Key prefix " + prefix + " does not exist! ");
 		    break;
 	    }
 	}
@@ -122,7 +131,7 @@ public static class GameData {
 
     public static void Debug<K,V>(this Dictionary<K,V> d){
 	foreach (var item in d.Keys){
-            UnityEngine.Debug.Log(item + " -> " + d[item]);
+	    UnityEngine.Debug.Log(item + " -> " + d[item]);
 	}
     }
 

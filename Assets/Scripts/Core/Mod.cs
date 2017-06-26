@@ -2,10 +2,15 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using MoonSharp.Interpreter;
+using MoonSharp.Interpreter.Loaders;
+
 
 public class Mod {
     string sourceCode;
     Script script;
+    string path;
+
+    public static string CorePath = Application.dataPath +  "/StreamingAssets/Core/";
 
     public enum ModuleType {
 	NPC,
@@ -14,38 +19,11 @@ public class Mod {
 	NULL
     }
     public static List<Mod> Mods    = new List<Mod>();
-    public static List<Mod> LuaCore = new List<Mod>();
+    public static Dictionary<string, Mod> LuaCore = new Dictionary<string, Mod>();
 
     public ModuleType type;
     public string Name;
     public bool isActive = true;
-
-    //TODO: add exeptions or smth for erros in code
-    public void LoadScript(string code){
-	sourceCode = code;
-	script = new Script();
-	AddGlobalsToScript(ref script);
-	DynValue ret = script.DoString(sourceCode);
-
-	switch (script.Globals.Get("Module").String) {
-	    case "NPC": {
-		type = ModuleType.NPC;
-		break;
-	    }
-	    case "ITEM": {
-		type = ModuleType.ITEM;
-		break;
-	    }
-	    case "SPELL": {
-		type = ModuleType.SPELL;
-		break;
-	    }
-	    default:
-		type = ModuleType.NULL;
-		break;
-	}
-    }
-
 
     //TODO: Add params to Lua call function
     public void Call(string fun){
@@ -55,9 +33,12 @@ public class Mod {
 	}
     }
 
-    public static void AddGlobalsToScript(ref Script s){
+    public static void AddGlobalsToMod(ref Mod m){
+	var s = m.script;
 	s.Globals[ "player" ] = typeof( Player );
 	s.Globals[  "core"  ] = typeof( LuaCoreAPI );
+
+	s.Globals[ "__dir"  ] = m.path;
     }
 
     //TODO: Refactor Lua Mod loading
@@ -66,8 +47,11 @@ public class Mod {
 	Mod m = new Mod();
 	Script s = new Script();
 
-	string name = Path.GetFileName(Path.GetDirectoryName(mainFile));
-
+	m.script = s;
+	m.path = Path.GetDirectoryName(mainFile);
+	m.sourceCode = mainFileCode;
+	AddGlobalsToMod(ref m);
+	string name = Path.GetFileName(mainFile).Replace(".lua", "");
 	try{
 	    DynValue ret = s.DoString(mainFileCode);
 	}
@@ -81,9 +65,9 @@ public class Mod {
 	    }
 	    return false;
 	}
-	AddGlobalsToScript(ref s);
-	m.script = s;
-	m.sourceCode = mainFileCode;
+	catch(ScriptRuntimeException e){
+	    Debug.Log("Error While parsing script");
+	}
 	switch (s.Globals.Get("Module").String) {
 	    case "NPC": {
 		m.type = ModuleType.NPC;
@@ -101,21 +85,22 @@ public class Mod {
 		StartMenu.Print("File '" + Path.GetDirectoryName(mainFile) + "' doesn't have a Module Type!!!");
 		break;
 	}
+	m.Name = name;
 	if (isCore)
-	    LuaCore.Add(m);
+	{
+	    LuaCore[name] = m;
+	}
 	else
 	    Mods.Add(m);
-	m.Name = name;
 
 	return true;
     }
 
     public static void LoadAllMods(){
 	UserData.RegisterAssembly();
-	string builtinPath = Application.dataPath + "/StreamingAssets/Core/";
-	string[] coreLuaScripts = Directory.GetFiles(builtinPath,"*.lua");
+	string[] coreLuaScripts = Directory.GetFiles(CorePath,"*.lua");
 	foreach (var luaScript in coreLuaScripts){
-	    if(!LoadLua(luaScript))
+	    if(!LoadLua(luaScript,true))
 		Debug.LogError("Core Lua Script '" + luaScript + "' contains an error!!!");
 	}
 
@@ -162,6 +147,8 @@ public class Mod {
     {
 	//TODO: Optimize Mod.Trigger so that it doesn't have to loop through each mod every time
 	foreach(Mod m in Mods)
+	    m.Call(eventName);
+	foreach(Mod m in LuaCore.Values)
 	    m.Call(eventName);
     }
 }
