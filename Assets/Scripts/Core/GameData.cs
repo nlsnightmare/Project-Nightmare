@@ -19,7 +19,7 @@ public static class GameData {
 	ItemNames = LoadDictionaryFromFile("Data/ItemNames.dat");
 	CharacterNames = LoadDictionaryFromFile("Data/CharacterNames.dat");
 	UnityEngine.SceneManagement.SceneManager.sceneLoaded += (scene, mode) => {
-	    Mod.Trigger("onLoad");
+	    Mod.Trigger("onLoad",scene.name);
 	};
     }
 

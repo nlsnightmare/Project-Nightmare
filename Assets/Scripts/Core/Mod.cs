@@ -26,10 +26,10 @@ public class Mod {
     public bool isActive = true;
 
     //TODO: Add params to Lua call function
-    public void Call(string fun){
+    public void Call(string fun, params string[] data){
 	var f = script.Globals[fun];
 	if(f != null){
-	    script.Call(f);
+	    script.Call(f, data);
 	}
     }
 
@@ -143,12 +143,12 @@ public class Mod {
 	}
     }
 
-    public static void Trigger(string eventName)
+	public static void Trigger(string eventName, params string[] data)
     {
 	//TODO: Optimize Mod.Trigger so that it doesn't have to loop through each mod every time
 	foreach(Mod m in Mods)
-	    m.Call(eventName);
+	    m.Call(eventName, data);
 	foreach(Mod m in LuaCore.Values)
-	    m.Call(eventName);
+	    m.Call(eventName, data);
     }
 }
