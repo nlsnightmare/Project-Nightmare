@@ -27,11 +27,15 @@ public class LuaCoreAPI
 
 
 
-    public static LuaObject Create(string imagePath, int pixelsPerUnit, int x, int y)
-    {
+    public static LuaObject Create(DynValue args){
 	LuaObject lObj = new LuaObject();
-	if (!File.Exists(imagePath))
-	{
+	
+	var imagePath = args.Table.Get("image").String;
+	int pixelsPerUnit = (int)args.Table.Get("pixelsPerUnit").Number;
+	int x = (int)args.Table.Get("x").Number;
+	int y = (int)args.Table.Get("y").Number;
+
+	if (!File.Exists(args.Table.Get("image").String)){
 	    Debug.Log("Path doesn't exist!");
 	}
 	var go = new GameObject();
