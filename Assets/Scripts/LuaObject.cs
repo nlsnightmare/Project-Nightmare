@@ -8,12 +8,9 @@ public class LuaObject {
     Dictionary<string,ScriptFunctionDelegate> events = new Dictionary<string,ScriptFunctionDelegate>();
     public Transform pos;
 
-    public void Trigger(string eventName){
-	Debug.Log("yayyyyyyyy");
-	if (events.ContainsKey(eventName)){
-	    events[eventName]();
-	    Debug.Log("im called");
-	}
+    public void Trigger(string eventName,params DynValue[] args ){
+	if (events.ContainsKey(eventName))
+	    events[eventName](args);
     }
 
     public void Bind(string eventName, DynValue fun){

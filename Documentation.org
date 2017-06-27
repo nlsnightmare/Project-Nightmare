@@ -140,3 +140,5 @@
    Filename: LuaCoreAPI.cs L37
 ** TODO Add support for complex colliders
    Filename: LuaCoreAPI.cs L86
+* Notes
+  + Add playerName character limit(25 chars should be enough)

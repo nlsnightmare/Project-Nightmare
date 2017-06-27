@@ -3,6 +3,11 @@ function onInteract()
     core.Print("X: "..x.." Y: "..y)
 end
 
+function onUpdate(dt)
+    core.Print("Delta Time is : " .. dt)
+end
+
+
 function onLoad(name)
     core.Print(name)
     if name == "Town1" then
@@ -16,6 +21,7 @@ function onLoad(name)
 	}
         tank = core.Create(tankParams)
         tank.Bind("onInteract",onInteract)
+	tank.Bind("onUpdate", onUpdate)
     end
 end
 

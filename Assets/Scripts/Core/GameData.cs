@@ -48,7 +48,7 @@ public static class GameData {
 	//Check for names
 	if(Debug){
 	    Initialize();
-	    UnityEngine.Debug.Log(CharacterNames.Count);
+	    LoadSavedGame(Application.dataPath + "/StreamingAssets/Saves/Test.sav",true);
 	}
 	Regex namesRegex = new Regex(@"{(T_|I_|C_|S_)(\w+)}");
 	var matches = namesRegex.Matches(input);
@@ -110,7 +110,7 @@ public static class GameData {
 	sr.Close();
     }
 
-    public static void LoadSavedGame(string filename){
+    public static void LoadSavedGame(string filename,bool Debug = false){
 	Dictionary<string,string> dict = new Dictionary<string,string>();
 	var lines = File.ReadAllLines(filename);
 	for (int i = 0; i < lines.Length; i+=2) {
@@ -122,6 +122,8 @@ public static class GameData {
 	SaveData = dict;
 	//SaveData.Debug();
 
+	if (Debug)
+	    return;
 	UnityEngine.SceneManagement.SceneManager.LoadScene(SaveData["Map"]);
 	var player = Resources.Load("Prefabs/player");
 	Vector2 playerPos =  new Vector2(Int32.Parse(SaveData["player_x"]),Int32.Parse(SaveData["player_y"]));
@@ -146,6 +148,9 @@ public static class GameData {
 	SaveData["Map"] = "Town1";
 	SaveData["player_x"] = "0";
 	SaveData["player_y"] = "0";
+
+	SaveData["playerCurrentHP"] = "10";
+	SaveData["playerMaxHP"] = "10";
 
 	//TODO: start a timer
 

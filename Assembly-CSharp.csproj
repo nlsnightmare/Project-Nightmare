@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Core\Settings.cs" />
      <Compile Include="Assets\Scripts\Core\StartMenu.cs" />
      <Compile Include="Assets\Scripts\Door.cs" />
+     <Compile Include="Assets\Scripts\GUI.cs" />
      <Compile Include="Assets\Scripts\IInteractable.cs" />
      <Compile Include="Assets\Scripts\LuaObject.cs" />
      <Compile Include="Assets\Scripts\LuaObjectDriver.cs" />
