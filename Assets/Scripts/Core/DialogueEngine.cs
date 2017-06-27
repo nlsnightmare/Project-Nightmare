@@ -97,6 +97,7 @@ public class DialogueEngine : MonoBehaviour {
 	waitingConfirm = true;
 	while(waitingConfirm);
 
+        Player.SetState(Player.ControlState.Normal);
 	StringToShow = "";
     }
 //TODO: ewfwe

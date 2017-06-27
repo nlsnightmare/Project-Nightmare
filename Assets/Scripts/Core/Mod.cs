@@ -102,7 +102,7 @@ public class Mod {
     }
 
     public static void LoadAllMods(bool isDebug = false){
-	//UserData.RegisterType<Script>();
+	UserData.RegisterType<Script>();
 	UserData.RegisterAssembly();
 	string[] coreLuaScripts = Directory.GetFiles(CorePath,"*.lua");
 	foreach (var luaScript in coreLuaScripts){
@@ -149,8 +149,7 @@ public class Mod {
 	}
     }
 
-    public static void Trigger(string eventName, params string[] data)
-    {
+    public static void Trigger(string eventName, params string[] data){
 	//TODO: Optimize Mod.Trigger so that it doesn't have to loop through each mod every time
 	foreach(Mod m in Mods)
 	    m.Call(eventName, data);

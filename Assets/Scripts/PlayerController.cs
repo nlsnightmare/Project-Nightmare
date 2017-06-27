@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour {
 	Vector2 size = direction.x != 0? new Vector2(1,0.5f) : new Vector2(0.5f,1);
 	RaycastHit2D hitInfo = Physics2D.BoxCast((Vector2)transform.position+direction, size, 0, direction, 0, InteractMask);
 	if (hitInfo.collider != null){
-	    Debug.Log("hit something!");
+	    Debug.Log("Trying to interact with: " + hitInfo.collider.name);
 	    var t = hitInfo.collider.gameObject.GetComponent<IInteractable>();
 	    if(t != null){
 		t.InteractWithPlayer();
