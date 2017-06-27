@@ -55,9 +55,25 @@
        4. y: the y position of the object
        5. collision: wheather the object has collision or not
 *** Lua Object
-    bind,
-    trigger,
-    getposition
+    The Lua Object has the following functions:
+    1. _Bind(eventname,f)_
+       Binds the function f to the given event.
+       #+BEGIN_SRC lua
+       function Interact()
+           core.Print("Hello world!")
+       end
+       
+       obj = core.Create({image = __dir.."img.png"})
+       obj.Bind("onInteract",Interact)
+       #+END_SRC
+
+    2. _Trigger(eventname)_
+       Trigger the event with given name.
+    3. _GetPosition()_
+       Returns a tuple (x,y) which contains the x and y coordinates of the object.
+       #+BEGIN_SRC lua
+       x,y = object.GetPosition()
+       #+END_SRC
 ** Dialogue
 *** Prefixes:
     For now there are 4 special prefixes:
@@ -71,8 +87,9 @@
        The prefix "S_" is reserved for saved data
 
 *** Example Usage:
+    #+BEGIN_SRC csharp
     Debug.Log(GameData.Replace("Hello, {S_playerName}! It's good to see you!"));
-
+    #+END_SRC
 * Tasks
 ** DONE Add error handling for lua scripts
    CLOSED: [2017-06-23 Παρ 13:50]
