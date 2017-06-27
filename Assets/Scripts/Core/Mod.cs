@@ -4,11 +4,15 @@ using UnityEngine;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Loaders;
 
-
+[MoonSharpUserData]
 public class Mod {
     string sourceCode;
-    Script script;
-    string path;
+    public Script script {
+		get;
+		private set; 
+	}
+
+	string path;
 
     public static string CorePath = Application.dataPath +  "/StreamingAssets/Core/";
 
@@ -39,7 +43,8 @@ public class Mod {
 	s.Globals[  "core"  ] = typeof( LuaCoreAPI );
 
 	s.Globals[ "__dir"  ] = m.path;
-    }
+		s.Globals["__me"] = m;
+	}
 
     //TODO: Refactor Lua Mod loading
     public static bool LoadLua( string mainFile ,bool isCore = false){
@@ -97,7 +102,8 @@ public class Mod {
     }
 
     public static void LoadAllMods(){
-	UserData.RegisterAssembly();
+		UserData.RegisterType<Script>();
+		UserData.RegisterAssembly();
 	string[] coreLuaScripts = Directory.GetFiles(CorePath,"*.lua");
 	foreach (var luaScript in coreLuaScripts){
 	    if(!LoadLua(luaScript,true))

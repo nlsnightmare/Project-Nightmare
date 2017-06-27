@@ -5,7 +5,13 @@ using MoonSharp.Interpreter;
 
 [MoonSharpUserData]
 public class LuaObject {
-	public static void a(){
-		Debug.Log("it is working!!!");
-	}
+    ScriptFunctionDelegate interact;
+    public void Interact(){
+	interact();
+    }
+
+    public void Bind(string function, DynValue fun){
+	if (function == "onInteract")
+	    interact += fun.Function.GetDelegate();
+    }
 }

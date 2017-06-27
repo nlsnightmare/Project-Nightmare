@@ -14,6 +14,10 @@ public class DialogueEngine : MonoBehaviour {
     static string TargetString = "";
     static int Delay = 1000;
 
+    const int slowSpeed = 150;
+    const int normalSpeed = 150;
+    const int fastSpeed = 150;
+
     void Start(){
 	if(Instance == null)
 	    Instance = this;
@@ -23,15 +27,16 @@ public class DialogueEngine : MonoBehaviour {
 	int delay = 0;
 	switch (speed) {
 	    case "slow":
-		delay = 150;
+		delay = slowSpeed;
 		break;
 	    case "normal":
-		delay = 75;
+		delay = normalSpeed;
 		break;
 	    case "fast":
-		delay = 50;
+		delay = fastSpeed;
 		break;
 	    default:
+		delay = normalSpeed;
 		break;
 	}
         Delay = delay;
@@ -44,6 +49,8 @@ public class DialogueEngine : MonoBehaviour {
 
     public static void Print(string[] messages, string speed){
 	SetDelay(speed);
+	for(int i = 0; i < messages.Length; i++)
+	    messages[i] = GameData.ReplaceParameters(messages[i]);
 	StartDialogueThread(messages,speed);
     }
 

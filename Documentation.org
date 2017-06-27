@@ -44,7 +44,7 @@
     3. C_:
        The prefix "I_" is reserved for Character names
     4. S_:
-       The prefix "I_" is reserved for saved data
+       The prefix "S_" is reserved for saved data
 
 *** Example Usage:
     Debug.Log(GameData.Replace("Hello, {S_playerName}! It's good to see you!"));
