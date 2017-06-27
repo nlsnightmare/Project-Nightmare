@@ -74,13 +74,13 @@ public class DialogueEngine : MonoBehaviour {
         t = new Thread( () => {
 		DialogueEngine.ShowDialogue(s);
 	    });
+        Player.SetState(Player.ControlState.Talking);
 	t.Start();
     }
 
 
     //Runs on a seperate thread, prints the text
     public static void ShowDialogue(string TargetString){
-        Player.SetState(Player.ControlState.Talking);
         StringToShow = "";
         foreach (var c in TargetString)
         {
@@ -98,7 +98,6 @@ public class DialogueEngine : MonoBehaviour {
 	while(waitingConfirm);
 
 	StringToShow = "";
-	Player.SetState(Player.ControlState.Normal);
     }
 
     public static void ShowDialogue(string[] messages){

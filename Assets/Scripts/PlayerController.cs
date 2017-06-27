@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour {
 	    case Player.ControlState.Talking:
 		if (Input.GetKeyDown(KeyCode.Q))
 		    DialogueEngine.waitingConfirm = false;
+		rb.velocity = Vector2.zero;
 		break;
 	    default:
 		break;
@@ -63,7 +64,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void StopMoving(){
-	Debug.Log("huh?");
 	rb.velocity = Vector2.zero;
     }
 }

@@ -94,8 +94,8 @@
 ** DONE Add error handling for lua scripts
    CLOSED: [2017-06-23 Παρ 13:50]
    FileName: Mod.cs L64
-** DONE Create a function for adding todo's here
-   CLOSED: [2017-06-23 Παρ 15:43]
+** DONE Create a function for adding todo's here  CLOSED: [2017-06-23 Παρ 15:43]
+   CLOSED: [2017-06-23 Παρ 15:16]
    Filename: *scratch* L17
 ** DONE Show a message when a new Game with an existing name is made
    CLOSED: [2017-06-23 Παρ 18:16]
@@ -108,6 +108,12 @@
 ** DONE Implement Dialogue Engine
    CLOSED: [2017-06-27 Τρι 17:01]
    Filename: LuaCoreAPI.cs L12
+** DONE This tries to change the players velocity, resulting in a cross thread error. FIXM
+   CLOSED: [2017-06-27 Τρι 21:37]
+   Filename: DialogueEngine.cs L10
+** DONE Optimize Mod.Trigger so that it doesn't have to loop through each mod every time
+   CLOSED: [2017-06-27 Τρι 21:38]
+   Filename: Mod.cs L163
 ** TODO Add Easter eggs on certain names
    GameData.cs L129
 ** TODO Start a timer when a new Game is initialized
@@ -134,11 +140,9 @@
    Filename: Mod.cs L50
 ** TODO Show Debug logs in-game if  lua debug setting is enabled
    Filename: LuaCore.cs L5
-** TODO Optimize Mod.Trigger so that it doesn't have to loop through each mod every time
-   Filename: Mod.cs L163
 ** TODO Add placeholder image for custom objects
    Filename: LuaCoreAPI.cs L37
 ** TODO Add support for complex colliders
    Filename: LuaCoreAPI.cs L86
-* Notes
+* Note
   + Add playerName character limit(25 chars should be enough)
