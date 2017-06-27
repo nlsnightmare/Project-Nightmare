@@ -10,7 +10,8 @@ public class Player {
 	Normal,
 	Stunned,
 	Talking,
-	Confirm
+	Confirm,
+	Paused
     }
 
     private static PlayerController pController;
@@ -39,6 +40,9 @@ public class Player {
 	pController = playerGO.GetComponent<PlayerController>();
     }
 
+    public static ControlState GetState(){
+	return pController.PlayerState;
+    }
     public static void SetState(ControlState state){
 	pController.PlayerState = state;
     }
@@ -53,6 +57,11 @@ public class Player {
 	    case "Talking":
 		pController.PlayerState = ControlState.Talking;
 		break;
+	    case "Paused":
+		pController.PlayerState = ControlState.Paused;
+		break;
+	    default:
+		throw new Exception("ControlState '" + state + "' doesn't exist!");
 	}
     }
 }
