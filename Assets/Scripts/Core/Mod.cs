@@ -101,8 +101,8 @@ public class Mod {
 	return true;
     }
 
-    public static void LoadAllMods(){
-	UserData.RegisterType<Script>();
+    public static void LoadAllMods(bool isDebug = false){
+	//UserData.RegisterType<Script>();
 	UserData.RegisterAssembly();
 	string[] coreLuaScripts = Directory.GetFiles(CorePath,"*.lua");
 	foreach (var luaScript in coreLuaScripts){

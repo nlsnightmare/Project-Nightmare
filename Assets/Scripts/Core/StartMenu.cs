@@ -18,7 +18,8 @@ public class StartMenu : MonoBehaviour {
 
 
     public static void Print(string text,string color = "white"){
-	Instance.DebugText.text = "<color=" + color + ">" + text + "</color>";
+	if (Instance != null)
+	    Instance.DebugText.text = "<color=" + color + ">" + text + "</color>";
     }
 
     public GameObject MainMenu_GO;

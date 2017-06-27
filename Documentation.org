@@ -90,6 +90,8 @@
     #+BEGIN_SRC csharp
     Debug.Log(GameData.Replace("Hello, {S_playerName}! It's good to see you!"));
     #+END_SRC
+* Notes
+  + Add playerName character limit(25 chars should be enough)
 * Tasks
 ** DONE Add error handling for lua scripts
    CLOSED: [2017-06-23 Παρ 13:50]
@@ -108,7 +110,7 @@
 ** DONE Implement Dialogue Engine
    CLOSED: [2017-06-27 Τρι 17:01]
    Filename: LuaCoreAPI.cs L12
-** DONE This tries to change the players velocity, resulting in a cross thread error. FIXM
+** DONE This tries to change the players velocity, resulting in a cross thread error. FIXME
    CLOSED: [2017-06-27 Τρι 21:37]
    Filename: DialogueEngine.cs L10
 ** DONE Optimize Mod.Trigger so that it doesn't have to loop through each mod every time
@@ -144,5 +146,5 @@
    Filename: LuaCoreAPI.cs L37
 ** TODO Add support for complex colliders
    Filename: LuaCoreAPI.cs L86
-* Note
-  + Add playerName character limit(25 chars should be enough)
+** TODO ewfwe
+   Filename: DialogueEngine.cs L102

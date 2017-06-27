@@ -99,7 +99,7 @@ public class DialogueEngine : MonoBehaviour {
 
 	StringToShow = "";
     }
-
+//TODO: ewfwe
     public static void ShowDialogue(string[] messages){
 	foreach (var msg in messages){
 			ShowDialogue(msg);
