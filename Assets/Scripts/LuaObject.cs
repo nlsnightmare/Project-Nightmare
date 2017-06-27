@@ -5,13 +5,22 @@ using MoonSharp.Interpreter;
 
 [MoonSharpUserData]
 public class LuaObject {
-    ScriptFunctionDelegate interact;
+    Dictionary<string,ScriptFunctionDelegate> events = new Dictionary<string,ScriptFunctionDelegate>();
+
+    public LuaObject(){
+    }
     public void Interact(){
-	interact();
+	events["onInteract"]();
     }
 
-    public void Bind(string function, DynValue fun){
-	if (function == "onInteract")
-	    interact += fun.Function.GetDelegate();
+    public void Bind(string eventName, DynValue fun){
+	if (!events.ContainsKey(eventName)) {
+	    ScriptFunctionDelegate del = fun.Function.GetDelegate();
+	    events[eventName] = del;
+	}
+	else {
+	    events[eventName] += fun.Function.GetDelegate();
+	}
+	Debug.Log("bind succeded");
     }
 }

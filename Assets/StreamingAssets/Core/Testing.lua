@@ -1,5 +1,5 @@
 function onInteract()
-    d = { "Hello, {S_playerName}! It's good to see you!"}
+    d = { "Hello, {S_playerName}! It's good to see you!","fast"}
     core.ShowDialogue(d)
 end
 

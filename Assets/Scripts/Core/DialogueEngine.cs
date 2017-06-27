@@ -14,9 +14,9 @@ public class DialogueEngine : MonoBehaviour {
     static string TargetString = "";
     static int Delay = 1000;
 
-    const int slowSpeed = 150;
-    const int normalSpeed = 150;
-    const int fastSpeed = 150;
+    const int slowSpeed = 100;
+    const int normalSpeed = 75;
+    const int fastSpeed = 50;
 
     void Start(){
 	if(Instance == null)
