@@ -8,11 +8,11 @@ using MoonSharp.Interpreter.Loaders;
 public class Mod {
     string sourceCode;
     public Script script {
-		get;
-		private set; 
-	}
+	get;
+	private set; 
+    }
 
-	string path;
+    string path;
 
     public static string CorePath = Application.dataPath +  "/StreamingAssets/Core/";
 
@@ -43,8 +43,8 @@ public class Mod {
 	s.Globals[  "core"  ] = typeof( LuaCoreAPI );
 
 	s.Globals[ "__dir"  ] = m.path;
-		s.Globals["__me"] = m;
-	}
+	s.Globals[  "__me"  ] = m;
+    }
 
     //TODO: Refactor Lua Mod loading
     public static bool LoadLua( string mainFile ,bool isCore = false){
@@ -102,8 +102,8 @@ public class Mod {
     }
 
     public static void LoadAllMods(){
-		UserData.RegisterType<Script>();
-		UserData.RegisterAssembly();
+	UserData.RegisterType<Script>();
+	UserData.RegisterAssembly();
 	string[] coreLuaScripts = Directory.GetFiles(CorePath,"*.lua");
 	foreach (var luaScript in coreLuaScripts){
 	    if(!LoadLua(luaScript,true))
@@ -149,7 +149,7 @@ public class Mod {
 	}
     }
 
-	public static void Trigger(string eventName, params string[] data)
+    public static void Trigger(string eventName, params string[] data)
     {
 	//TODO: Optimize Mod.Trigger so that it doesn't have to loop through each mod every time
 	foreach(Mod m in Mods)

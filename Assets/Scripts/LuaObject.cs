@@ -7,10 +7,12 @@ using MoonSharp.Interpreter;
 public class LuaObject {
     Dictionary<string,ScriptFunctionDelegate> events = new Dictionary<string,ScriptFunctionDelegate>();
 
-    public LuaObject(){
-    }
-    public void Interact(){
-	events["onInteract"]();
+    public void Trigger(string eventName){
+	Debug.Log("yayyyyyyyy");
+	if (events.ContainsKey(eventName)){
+	    events[eventName]();
+	    Debug.Log("im called");
+	}
     }
 
     public void Bind(string eventName, DynValue fun){

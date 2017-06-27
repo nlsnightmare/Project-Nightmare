@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\Door.cs" />
      <Compile Include="Assets\Scripts\IInteractable.cs" />
      <Compile Include="Assets\Scripts\LuaObject.cs" />
+     <Compile Include="Assets\Scripts\LuaObjectDriver.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\PlayerStats.cs" />

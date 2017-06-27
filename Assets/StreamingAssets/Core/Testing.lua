@@ -1,25 +1,19 @@
 function onInteract()
-    d = { "Hello, {S_playerName}! It's good to see you!","fast"}
-    core.ShowDialogue(d)
+    core.ShowDialogue("Hello, {S_playerName}! It's good to see you!", "fast")
 end
 
 function onLoad(name)
     core.Print(name)
     if name == "Town1" then
 	tankParams = {
+	    name = "tank1",
 	    image = __dir.."/tank.png",
-	    pixelsPerUnit = 247,
+	    pixelsPerUnit = 270,
 	    x = 3,
-	    y = 3
+	    collision = true
 	}
         tank = core.Create(tankParams)
-	t = {}
-	t.test = "A"
-	t.what = "b:"
-	t.f = "A"
-	t.three = "A"
         tank.Bind("onInteract",onInteract)
-        tank.Interact()
     end
 end
 

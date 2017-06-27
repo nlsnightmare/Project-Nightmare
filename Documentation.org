@@ -1,5 +1,15 @@
 * Nightmare game Documentation
 ** Lua API
+*** Globals
+    All Lua Scripts have the following global variables:
+    1. player
+       The player class.
+    2. core 
+       class which offers control over dialogue etc.
+    3. __dir
+       string containing the script's directory
+    4. __me 
+       Contains the mod
 *** Events
     Lua Scripts have these events:
     1. _onLoad_
@@ -34,6 +44,16 @@
     2. _ShowDialogue(messages)_
        Displays the messages on the dialogue box. Also freezes the player
        *messages*: the array of messages to be displayed
+    3. _Create(args)_
+       Creates an object and instantiates it on the scene.
+       *Returns*: A LuaObject
+       *args*: Args is a table which can contain the following:
+       0. name: the name of the created object
+       1. imagePath: The path of the sprite
+       2. pixelsPerUnit: how many pixels make one unit in world space
+       3. x: the x position of the object
+       4. y: the y position of the object
+       5. collision: wheather the object has collision or not
 ** Dialogue
 *** Prefixes:
     For now there are 4 special prefixes:
@@ -64,6 +84,9 @@
 ** DONE Make Player take damage
    CLOSED: [2017-06-24 ”·‚ 00:30]
    Filename: Player.cs L21
+** DONE Implement Dialogue Engine
+   CLOSED: [2017-06-27 ‘ÒÈ 17:01]
+   Filename: LuaCoreAPI.cs L12
 ** TODO Add Easter eggs on certain names
    GameData.cs L129
 ** TODO Start a timer when a new Game is initialized
@@ -90,7 +113,9 @@
    Filename: Mod.cs L50
 ** TODO Show Debug logs in-game if  lua debug setting is enabled
    Filename: LuaCore.cs L5
-** TODO Implement Dialogue Engine
-   Filename: LuaCoreAPI.cs L12
 ** TODO Optimize Mod.Trigger so that it doesn't have to loop through each mod every time
    Filename: Mod.cs L163
+** TODO Add placeholder image for custom objects
+   Filename: LuaCoreAPI.cs L37
+** TODO Add support for complex colliders
+   Filename: LuaCoreAPI.cs L86
