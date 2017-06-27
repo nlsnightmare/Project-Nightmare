@@ -6,6 +6,7 @@ using MoonSharp.Interpreter;
 [MoonSharpUserData]
 public class LuaObject {
     Dictionary<string,ScriptFunctionDelegate> events = new Dictionary<string,ScriptFunctionDelegate>();
+    public Transform pos;
 
     public void Trigger(string eventName){
 	Debug.Log("yayyyyyyyy");
@@ -24,5 +25,11 @@ public class LuaObject {
 	    events[eventName] += fun.Function.GetDelegate();
 	}
 	Debug.Log("bind succeded");
+    }
+
+    public DynValue GetPosition(){
+	DynValue ret = new DynValue();
+	ret = DynValue.NewTuple(DynValue.NewNumber(pos.position.x),DynValue.NewNumber(pos.position.y));
+	return ret;
     }
 }

@@ -32,6 +32,7 @@ public class LuaCoreAPI
 	LuaObject lObj = new LuaObject();
 	
 	//Input defaults here
+	#region Input Defaults
 	string name;
 	if (args.Table.Get("name") == DynValue.Nil)
 	    name = "new lua object";
@@ -66,6 +67,7 @@ public class LuaCoreAPI
 	    hasCollision = true;
 	else
 	    hasCollision = args.Table.Get("collision").Boolean;
+	#endregion
 
 	//Create the gameobject
 	var go = new GameObject();
@@ -74,6 +76,7 @@ public class LuaCoreAPI
 	var driver = go.AddComponent<LuaObjectDriver>();
 	driver.obj = lObj;
 	go.transform.position = new Vector2(x, y);
+	lObj.pos = go.transform;
 	
 	//Load and add the sprite
 	if (!File.Exists(imagePath)){

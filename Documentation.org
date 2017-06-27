@@ -54,6 +54,10 @@
        3. x: the x position of the object
        4. y: the y position of the object
        5. collision: wheather the object has collision or not
+*** Lua Object
+    bind,
+    trigger,
+    getposition
 ** Dialogue
 *** Prefixes:
     For now there are 4 special prefixes:

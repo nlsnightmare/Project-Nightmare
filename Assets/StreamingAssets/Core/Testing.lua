@@ -1,5 +1,6 @@
 function onInteract()
-    core.ShowDialogue("Hello, {S_playerName}! It's good to see you!", "fast")
+    x, y = tank.GetPosition()
+    core.Print("X: "..x.." Y: "..y)
 end
 
 function onLoad(name)
@@ -9,7 +10,8 @@ function onLoad(name)
 	    name = "tank1",
 	    image = __dir.."/tank.png",
 	    pixelsPerUnit = 270,
-	    x = 3,
+	    x = 2,
+	    y = 5,
 	    collision = true
 	}
         tank = core.Create(tankParams)
