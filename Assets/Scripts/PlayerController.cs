@@ -61,4 +61,9 @@ public class PlayerController : MonoBehaviour {
 	    }
 	}
     }
+
+    public void StopMoving(){
+	Debug.Log("huh?");
+	rb.velocity = Vector2.zero;
+    }
 }

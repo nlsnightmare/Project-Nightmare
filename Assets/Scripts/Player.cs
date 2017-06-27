@@ -45,20 +45,24 @@ public class Player {
     }
     public static void SetState(ControlState state){
 	pController.PlayerState = state;
+	if (pController.PlayerState != ControlState.Normal){
+	    pController.StopMoving();
+	    Debug.Log("wat");
+	}
     }
     public static void SetState(string state){
 	switch (state) {
 	    case "Stunned":
-		pController.PlayerState = ControlState.Stunned;
+		SetState( ControlState.Stunned );
 		break;
 	    case "Normal":
-		pController.PlayerState = ControlState.Normal;
+		SetState( ControlState.Normal );
 		break;
 	    case "Talking":
-		pController.PlayerState = ControlState.Talking;
+		SetState( ControlState.Talking );
 		break;
 	    case "Paused":
-		pController.PlayerState = ControlState.Paused;
+		SetState( ControlState.Paused );
 		break;
 	    default:
 		throw new Exception("ControlState '" + state + "' doesn't exist!");
