@@ -12,7 +12,7 @@ public static class GameData {
     private static int DecryptionKey = 129;
 
     //Data which depend on the gamestate. May differ over playsessions
-    static Dictionary<string,string> SaveData;
+    public static Dictionary<string,string> SaveData;
 
     public static void Initialize(){
 	TownNames = LoadDictionaryFromFile("Data/TownNames.dat");
@@ -48,9 +48,8 @@ public static class GameData {
 	//Check for names
 	if(Debug){
 	    Initialize();
-	    LoadSavedGame(Application.dataPath + "/StreamingAssets/Saves/Test.sav",true);
 	}
-	Regex namesRegex = new Regex(@"{(T_|I_|C_|S_)(\w+)}");
+	Regex namesRegex = new Regex(@"{(P_|T_|I_|C_|S_)(\w+)}");
 	var matches = namesRegex.Matches(input);
 
 	foreach (Match m in matches){
@@ -86,6 +85,9 @@ public static class GameData {
 		    }
 		    input = input.Replace( s, CharacterNames[key] );
 		    break;
+		case "P_":
+		    input = input.Replace( s, PlayerStats.GetStat(key).ToString());
+		    break;
 		default:
 		    UnityEngine.Debug.LogError("Key prefix " + prefix + " does not exist! ");
 		    break;
@@ -120,7 +122,8 @@ public static class GameData {
 	    dict[key] = value;
 	}
 	SaveData = dict;
-	//SaveData.Debug();
+	// SaveData.Debug();
+	PlayerStats.Load();
 
 	if (Debug)
 	    return;
@@ -129,7 +132,6 @@ public static class GameData {
 	Vector2 playerPos =  new Vector2(Int32.Parse(SaveData["player_x"]),Int32.Parse(SaveData["player_y"]));
 	Player.Spawn(playerPos);
     }
-
 
     public static void Debug<K,V>(this Dictionary<K,V> d){
 	foreach (var item in d.Keys){

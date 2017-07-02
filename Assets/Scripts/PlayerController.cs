@@ -37,8 +37,8 @@ public class PlayerController : MonoBehaviour {
 		}
 		break;
 	    case Player.ControlState.Talking:
-		if (Input.GetKeyDown(KeyCode.Q))
-		    DialogueEngine.waitingConfirm = false;
+		// if (Input.GetKeyDown(KeyCode.Q))
+		//     DialogueEngine.waitingConfirm = false;
 		rb.velocity = Vector2.zero;
 		break;
 	    default:
@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Interact(){
+	Debug.Log("PlayerController: You just pressed Q!");
 	Vector2 size = direction.x != 0? new Vector2(1,0.5f) : new Vector2(0.5f,1);
 	RaycastHit2D hitInfo = Physics2D.BoxCast((Vector2)transform.position+direction, size, 0, direction, 0, InteractMask);
 	if (hitInfo.collider != null){

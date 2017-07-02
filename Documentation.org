@@ -148,3 +148,7 @@
    Filename: LuaCoreAPI.cs L86
 ** TODO ewfwe
    Filename: DialogueEngine.cs L102
+** TODO Add font and position to the created text gameobject
+   Filename: LuaCoreAPI.cs L108
+** TODO add IDamageable Interface
+   Filename: DamageData.cs L17

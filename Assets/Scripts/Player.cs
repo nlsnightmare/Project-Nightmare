@@ -1,10 +1,11 @@
-using UnityEngine;
 using System;
-using System.Threading;
+using UnityEngine;
+using Combat;
 using MoonSharp.Interpreter;
 
 [MoonSharpUserData]
 public class Player {
+    #region Variable declerations
 
     public enum ControlState {
 	Normal,
@@ -17,21 +18,31 @@ public class Player {
     private static PlayerController pController;
     static GameObject PlayerPrefab;
     static GameObject playerGO;
+
+    #endregion
+
+    #region Initialization
     public static void Initialize( ){
 	PlayerPrefab = Resources.Load<GameObject>("Prefabs/player");
     }
+    #endregion
     
-    public static void TakeDamage(int amount,bool isLethal){
-	if (amount <= 0) return;
+    #region Combat Methods
+    public static void TakeDamage(DamageData dd){
+	if (dd.amount <= 0) return;
 
-	PlayerStats.Hp = Math.Min(PlayerStats.Hp - amount, isLethal?0:1);
-	if (PlayerStats.Hp == 0)
+	PlayerStats.HP = Math.Max(PlayerStats.HP - dd.amount, dd.isLethal?0:1);
+	if (PlayerStats.HP <= 0)
+	{
 	    Mod.Trigger("onPlayerDeath");
+	    throw new NotImplementedException("The Player has died");
+	}
 	else
 	    Mod.Trigger("onPlayerHit");
-
     }
+    #endregion
 
+    #region Spawn Methods
     public static void Spawn(int x, int y){
 	Spawn(new Vector2(x,y));
     }
@@ -39,7 +50,9 @@ public class Player {
 	playerGO = GameObject.Instantiate(PlayerPrefab,pos,Quaternion.identity);
 	pController = playerGO.GetComponent<PlayerController>();
     }
+    #endregion
 
+    #region State Code
     public static ControlState GetState(){
 	return pController.PlayerState;
     }
@@ -68,4 +81,5 @@ public class Player {
 		throw new Exception("ControlState '" + state + "' doesn't exist!");
 	}
     }
+    #endregion
 }

@@ -21,7 +21,6 @@ public class LuaObject {
 	else {
 	    events[eventName] += fun.Function.GetDelegate();
 	}
-	Debug.Log("bind succeded");
     }
 
     public DynValue GetPosition(){

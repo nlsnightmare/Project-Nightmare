@@ -30,7 +30,8 @@ public class Door : MonoBehaviour, IInteractable
 "You try to open the door",
 "It was locked"
 		};
-			DialogueEngine.Print(msg, "normal");
+			// DialogueEngine.Print(msg, "normal");
+			throw new System.NotImplementedException("dialogue engine is missing!");
 		}
 	}
 }

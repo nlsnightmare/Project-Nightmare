@@ -40,7 +40,8 @@ public class Mod {
     public static void AddGlobalsToMod(ref Mod m){
 	var s = m.script;
 	s.Globals[ "player" ] = typeof( Player );
-	s.Globals[  "core"  ] = typeof( LuaCoreAPI );
+	s.Globals[  "core"  ] = typeof( LuaAPI.LuaCoreAPI );
+	s.Globals[  "gui"  ] = typeof( LuaAPI.LuaGUIAPI );
 
 	s.Globals[ "__dir"  ] = m.path;
 	s.Globals[  "__me"  ] = m;
